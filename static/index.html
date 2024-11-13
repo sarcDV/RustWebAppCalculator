@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Calculator</title>
+</head>
+<body>
+    <h1>Web Calculator</h1>
+    <input type="number" id="a" placeholder="Number 1">
+    <input type="number" id="b" placeholder="Number 2">
+    <button onclick="calculate('add')">Add</button>
+    <button onclick="calculate('subtract')">Subtract</button>
+    <button onclick="calculate('multiply')">Multiply</button>
+    <button onclick="calculate('divide')">Divide</button>
+    <p id="result"></p>
+
+    <script>
+        function calculate(operation) {
+            const a = document.getElementById('a').value;
+            const b = document.getElementById('b').value;
+            fetch(`/${operation}/${a}/${b}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').innerText = `Result: ${data.result}`;
+                });
+        }
+    </script>
+</body>
+</html>
